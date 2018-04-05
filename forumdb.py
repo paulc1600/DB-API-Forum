@@ -8,7 +8,7 @@ def get_posts():
   conn = psycopg2.connect("dbname=forum")
   cursor = conn.cursor()
   cursor.execute("select content, time from posts order by time desc")
-  return = cursor.fetchall()
+  return cursor.fetchall()
   conn.close()
 
 def add_post(content):
