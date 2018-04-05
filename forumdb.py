@@ -7,7 +7,7 @@ def get_posts():
   """Return all posts from the 'database', most recent first."""
   conn = psycopg2.connect("dbname=forum")
   cursor = conn.cursor()
-  cursor.execute("select content, time from posts by time desc")
+  cursor.execute("select content, time from posts order by time desc")
   return = cursor.fetchall()
   conn.close()
 
