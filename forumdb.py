@@ -9,10 +9,12 @@ def get_posts():
   conn = psycopg2.connect("dbname=forum")
   cursor = conn.cursor()
   cursor.execute("select content, time from posts order by time desc")
-  all_posts = cursor.fetchall()
-  clean_posts = bleach.clean(all_posts)
+  all_posts_list = cursor.fetchall()
+  for one_post in all_posts_list
+    one_clean_post = bleach.clean(one_post)
+    all_clean_list.append(one_clean_post);
   conn.close()
-  return clean_posts
+  return all_clean_list
 
 def add_post(content):
   """Add a post to the 'database' with the current timestamp."""
