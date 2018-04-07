@@ -6,13 +6,14 @@ import bleach
 
 def get_posts():
   """Return all posts from the 'database', most recent first."""
-  conn = psycopg2.connect("dbname=forum")
-  cursor = conn.cursor()
-  cursor.execute("select content, time from posts order by time desc")
-  all_posts_list = cursor.fetchall()
-  for one_post in all_posts_list
-    one_clean_post = bleach.clean(one_post)
+  conn = psycopg2.connect("dbname=forum");
+  cursor = conn.cursor();
+  cursor.execute("select content, time from posts order by time desc");
+  all_posts_list = cursor.fetchall();
+  for one_post in all_posts_list;
+    one_clean_post = bleach.clean(one_post);
     all_clean_list.append(one_clean_post);
+    
   conn.close()
   return all_clean_list
 
