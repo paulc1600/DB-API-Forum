@@ -11,9 +11,9 @@ def get_posts():
   cursor.execute("select content, time from posts order by time desc")
   all_posts_list = cursor.fetchall()
   for one_post in all_posts_list:
-    one_clean_post = bleach.clean(one_post)
+    one_clean_post[0] = bleach.clean(one_post[0])
     all_clean_list.append(one_clean_post)
-    
+     
   conn.close()
   return all_clean_list
 
