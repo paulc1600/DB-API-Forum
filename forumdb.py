@@ -2,6 +2,7 @@
 
 import psycopg2
 import datetime
+import bleach
 
 def get_posts():
   """Return all posts from the 'database', most recent first."""
@@ -9,8 +10,9 @@ def get_posts():
   cursor = conn.cursor()
   cursor.execute("select content, time from posts order by time desc")
   all_posts = cursor.fetchall()
+  clean_posts = bleach.clean(all_posts)
   conn.close()
-  return all_posts
+  return clean_posts
 
 def add_post(content):
   """Add a post to the 'database' with the current timestamp."""
