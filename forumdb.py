@@ -9,7 +9,10 @@ def get_posts():
   conn = psycopg2.connect("dbname=forum")
   cursor = conn.cursor()
   cursor.execute("select content, time from posts order by time desc")
+  
   all_posts_list = cursor.fetchall()
+  all_clean_list = []
+  
   for one_post in all_posts_list:
     one_clean_post = ((),())
     # Use bleach to clean user content of post so no Jave Script injection attack
