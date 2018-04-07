@@ -11,8 +11,9 @@ def get_posts():
   cursor.execute("select content, time from posts order by time desc")
   all_posts_list = cursor.fetchall()
   for one_post in all_posts_list:
-    one_clean_post = ((),(),())
-    one_clean_post = (bleach.clean(one_post[0]), one_post[1], one_post[2]) 
+    one_clean_post = ((),())
+    # Use bleach to clean user content of post so no Jave Script injection attack
+    one_clean_post = (bleach.clean(one_post[0]), one_post[1]) 
     all_clean_list.append(one_clean_post)
      
   conn.close()
@@ -23,6 +24,7 @@ def add_post(content):
   conn = psycopg2.connect("dbname=forum")
   cursor = conn.cursor()
   one_post = content
+  # Must code this way to prevent SQL query injection attack / Bobby Tables fix
   cursor.execute("insert into posts values (%s)", (one_post,))
   conn.commit()
   conn.close()
